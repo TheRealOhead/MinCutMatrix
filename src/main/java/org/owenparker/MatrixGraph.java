@@ -56,7 +56,7 @@ public class MatrixGraph {
      * @param u First vertex to merge
      * @param v Second vertex to merge
      */
-    private void mergeVertices(int u, int v) {
+    public void mergeVertices(int u, int v) {
         for (int index = 0; index < size; index++) {
             // Add all of v's edges to u's edges
             setEdge(u, index, (
@@ -76,7 +76,7 @@ public class MatrixGraph {
     /**
      * Finds two random vertices that are adjacent and merges them using the mergeVertices() method
      */
-    private void mergeTwoRandomVertices() {
+    public void mergeTwoRandomVertices() {
         int u;
         int v;
 
@@ -86,24 +86,6 @@ public class MatrixGraph {
         } while (u == v || getEdge(u, v) == 0);
 
         mergeVertices(u, v);
-    }
-
-    /**
-     * Returns a random vertex that's adjacent to vertex u
-     * @param u Vertex to check for adjacent vertices
-     * @return A random vertex that's adjacent to u
-     */
-    private int findAdjacentVertex(int u) {
-        int sum = 0;
-        for (int n : matrix[u]) {
-            sum += n;
-        }
-        if (sum == 0) return 0;
-
-        while (true) {
-            int v = (int) (random.nextDouble() * size);
-            if (getEdge(u, v) != 0) return v;
-        }
     }
 
     /**
@@ -204,5 +186,9 @@ public class MatrixGraph {
     public void draw(String fileName) throws IOException {
         MutableGraph g = new Parser().read(generateGraphString());
         Graphviz.fromGraph(g).engine(Engine.FDP).render(Format.PNG).toFile(new File("./graphImages/" + fileName));
+    }
+
+    public int getSize() {
+        return size;
     }
 }

@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 
 public class Main {
     private static int iterations = 64;
-    private static String graphPath = "./data/kargerMinCut.txt";
-    //private static String graphPath = "./data/smallGraph.txt";
+    // private static String graphPath = "./data/kargerMinCut.txt";
+    private static String graphPath = "./data/smallGraph.txt";
     public static boolean draw = false;
     public static boolean drawOnlyLast = false;
 
-    public static void main(String[] args) throws IOException, NoValidEdgePresentException {
+    public static MatrixGraph getGraph() throws IOException {
         String input = Files.readString(Paths.get(graphPath));
         String[] arrayOfLines = input.split("\n");
 
@@ -50,6 +50,12 @@ public class Main {
                 graph.setEdge(firstVertex, vertex, 1);
             }
         }
+
+        return graph;
+    }
+
+    public static void main(String[] args) throws IOException, NoValidEdgePresentException {
+        MatrixGraph graph = getGraph();
 
         clearImageFolder();
 
